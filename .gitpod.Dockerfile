@@ -1,4 +1,4 @@
-FROM: jupyter/datascience-notebook:r-3.6.3
+FROM jupyter/datascience-notebook:r-3.6.3
 
 LABEL maintainer="UWA Stats1400"
 
@@ -9,7 +9,7 @@ USER root
 # R pre-requisites
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
-    apt-get install rclone
+    rclone && \
     pip3 install flask
 
 WORKDIR $HOME
