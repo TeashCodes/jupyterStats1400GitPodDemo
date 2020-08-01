@@ -1,13 +1,13 @@
 ports:
-- port: 8050
-  onOpen: open-preview
-- port: 8888
-  onOpen: open-browser
+  - port: 8050
+    onOpen: open-preview
+  - port: 8888
+    onOpen: open-browser
 tasks:
-- init: export WORKSPACEDIR="/workspace/$(ls /workspace | head -n 1) && printenv > /home/gitpod/envlist"
-  command: export WORKSPACEDIR="/workspace/$(ls /workspace | head -n 1)"
-  command: cp -r /workspace/dash-and-jupyter-notebook-with-gitpod/.jupyter /home/gitpod/
-
+  - init: export WORKSPACEDIR="/workspace/$(ls /workspace | head -n 1)" && printenv > /home/gitpod/envlist
+    command: export WORKSPACEDIR="/workspace/$(ls /workspace | head -n 1)"
+    command: cp -r $WORKSPACEDIR/.jupyter /home/gitpod/
+  
 # run flask app to setup onedrive ?
 # config rclone
 # https://rclone.org/onedrive/
