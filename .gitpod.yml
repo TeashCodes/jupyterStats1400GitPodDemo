@@ -1,5 +1,4 @@
-image:
-  file: .gitpod.Dockerfile
+image: jupyter/datascience-notebook:r-3.6.3
 ports:
   - port: 8050
     onOpen: open-preview
