@@ -1,16 +1,9 @@
 image:
   file: .gitpod.Dockerfile
 ports:
-  - port: 8050
-    onOpen: open-preview
   - port: 8888
     onOpen: open-browser
 tasks:
-  - init: cp -r $GITPOD_REPO_ROOT/.jupyter /home/gitpod/
-    command: cp -r $GITPOD_REPO_ROOT/.jupyter /home/gitpod/
   - command: jupyter notebook
-    name: Jupyter Notebook Server
-# run flask app to setup onedrive ?
-# config rclone
-# https://rclone.org/onedrive/
-# launch jupyter
+  name: Jupyter Notebook Server
+  # Should capture the opener url and maybe open
