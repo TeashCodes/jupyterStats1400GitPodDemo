@@ -26,7 +26,7 @@ RUN { echo && echo "PS1='\[\e]0;\u \w\a\]\[\033[01;32m\]\u\[\033[00m\] \[\033[01
 
 ### Move all the stuff setup by jupyter
 
-RUN mv -R /home/$NB_USER /home/$GITPOD_USERNAME && \
+RUN mv -r /home/$NB_USER /home/$GITPOD_USERNAME && \
     usermod -l $NB_USER $GITPOD_USERNAME &&\
     groupmod -n $NB_USER $GITPOD_USERNAME
 
