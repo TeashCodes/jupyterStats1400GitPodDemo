@@ -10,7 +10,7 @@ RUN useradd -l -u 33333 -G sudo -md /home/gitpod -s /bin/bash -p gitpod gitpod &
     mv /home/$NB_USER /home/gitpod &&\
     usermod $NB_USER -G sudo && \
     usermod $NB_USER -G gitpod && \
-    usermod gitpod -G $NB_USER && \
+    # usermod gitpod -G users && \
     sed -i.bkp -e 's/%sudo\s\+ALL=(ALL\(:ALL\)\?)\s\+ALL/%sudo ALL=NOPASSWD:ALL/g' /etc/sudoers
 ENV HOME=/home/gitpod
 WORKDIR $HOME
