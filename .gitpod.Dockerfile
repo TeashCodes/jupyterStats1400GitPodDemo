@@ -6,6 +6,8 @@ ARG GITPOD_USERNAME="gitpod"
 
 USER root
 
+RUN apt-get -yq install software-properties-common
+
 ### Git ###
 RUN add-apt-repository -y ppa:git-core/ppa \
     && apt-get install -yq git \
