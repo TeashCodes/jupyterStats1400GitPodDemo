@@ -6,12 +6,12 @@ ARG GITPOD_USERNAME="gitpod"
 
 USER root
 
-RUN apt-get -yq install software-properties-common
 
-### Git ###
-RUN add-apt-repository -y ppa:git-core/ppa \
-    && apt-get install -yq git \
-    && rm -rf /var/lib/apt/lists/*
+# RUN apt-get -yq install software-properties-common
+# ### Git ###
+# RUN add-apt-repository -y ppa:git-core/ppa \
+#     && apt-get install -yq git \
+#     && rm -rf /var/lib/apt/lists/*
 
 ### Gitpod user ###
 # '-l': see https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#user
