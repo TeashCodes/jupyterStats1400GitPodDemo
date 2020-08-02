@@ -6,7 +6,7 @@ USER root
 
 ### Gitpod user ###
 RUN useradd -l -u 33333 -G sudo -md /home/gitpod -s /bin/bash -p gitpod gitpod && \
-    rm /home/gitpod &&\
+    rm -r /home/gitpod &&\
     mv /home/$NB_USER /home/gitpod &&\
     usermod $NB_USER -G sudo && \
     usermod $NB_USER -G gitpod && \
