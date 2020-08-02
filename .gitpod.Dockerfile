@@ -8,11 +8,12 @@ COPY  .jupyter/fix-permissions /bin/fix-permissions
 
 ### Gitpod user ###
 RUN useradd -l -u 33333 -G sudo -md /home/gitpod -s /bin/bash -p gitpod gitpod && \
-    rm -r /home/gitpod &&\
-    mv /home/$NB_USER /home/gitpod &&\
+    rm -r /home/gitpod && \
+    mv /home/$NB_USER /home/gitpod && \
     usermod $NB_USER -G sudo,gitpod && \
-    chmod a+X /bin/fix-permissions &&\
-    fix-permissions 100 /home/gitpod &&\
+    chmod a+rx /bin/fix-permissions && \
+    # chmod u+s /bin/fix-permissions &&\
+    # fix-permissions 100 /home/gitpod &&\
     # usermod gitpod -G users && \
     sed -i.bkp -e 's/%sudo\s\+ALL=(ALL\(:ALL\)\?)\s\+ALL/%sudo ALL=NOPASSWD:ALL/g' /etc/sudoers
 
