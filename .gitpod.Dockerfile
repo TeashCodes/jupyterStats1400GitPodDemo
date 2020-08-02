@@ -6,6 +6,12 @@ ARG GITPOD_USERNAME="gitpod"
 
 USER root
 
+### Move all the stuff setup by jupyter
+
+RUN mv /home/$NB_USER /home/$GITPOD_USERNAME && \
+    usermod -l $GITPOD_USERNAME $NB_USER &&\
+    groupmod -n $GITPOD_USERNAME $NB_USER
+
 
 # RUN apt-get -yq install software-properties-common
 # ### Git ###
@@ -22,17 +28,6 @@ ENV HOME=/home/$GITPOD_USERNAME
 WORKDIR $HOME
 # custom Bash prompt
 RUN { echo && echo "PS1='\[\e]0;\u \w\a\]\[\033[01;32m\]\u\[\033[00m\] \[\033[01;34m\]\w\[\033[00m\] \\\$ '" ; } >> .bashrc
-
-
-### Move all the stuff setup by jupyter
-
-RUN mv /home/$NB_USER /home/$GITPOD_USERNAME && \
-    usermod -l $NB_USER $GITPOD_USERNAME &&\
-    groupmod -n $NB_USER $GITPOD_USERNAME
-
-#ENV NB_USER="gitpod"
-#ENV NB_UID="1000"
-#ENV NB_GID="100"
 
 
 ### Gitpod user (2) ###
