@@ -2,28 +2,16 @@ FROM jupyter/r-notebook:acb539921413
 
 LABEL maintainer="UWA Stats1400"
 
-ARG GITPOD_USERNAME="gitpod"
+ARG NB_USER="gitpod"
+ARG NB_UID="3333"
+
 
 USER root
 
-### Move all the stuff setup by jupyter
-
-RUN mv /home/$NB_USER /home/$GITPOD_USERNAME && \
-    usermod -l $GITPOD_USERNAME $NB_USER &&\
-    groupmod -n $GITPOD_USERNAME $NB_USER
-
-
-# RUN apt-get -yq install software-properties-common
-# ### Git ###
-# RUN add-apt-repository -y ppa:git-core/ppa \
-#     && apt-get install -yq git \
-#     && rm -rf /var/lib/apt/lists/*
 
 ### Gitpod user ###
-# '-l': see https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#user
-RUN useradd -l -u 33333 -G sudo -md /home/$GITPOD_USERNAME -s /bin/bash -p $GITPOD_USERNAME $GITPOD_USERNAME \
-    # passwordless sudo for users in the 'sudo' group
-    && sed -i.bkp -e 's/%sudo\s\+ALL=(ALL\(:ALL\)\?)\s\+ALL/%sudo ALL=NOPASSWD:ALL/g' /etc/sudoers
+RUN usermod $NB_USER -G sudo && \
+    sed -i.bkp -e 's/%sudo\s\+ALL=(ALL\(:ALL\)\?)\s\+ALL/%sudo ALL=NOPASSWD:ALL/g' /etc/sudoers
 ENV HOME=/home/$GITPOD_USERNAME
 WORKDIR $HOME
 # custom Bash prompt
@@ -31,7 +19,7 @@ RUN { echo && echo "PS1='\[\e]0;\u \w\a\]\[\033[01;32m\]\u\[\033[00m\] \[\033[01
 
 
 ### Gitpod user (2) ###
-USER $GITPOD_USERNAME
+USER $NB_USER
 # use sudo so that user does not get sudo usage info on (the first) login
 RUN sudo echo "Running 'sudo' for Gitpod: success" && \
     # create .bashrc.d folder and source it in the bashrc
