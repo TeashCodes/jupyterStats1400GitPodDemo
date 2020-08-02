@@ -5,5 +5,5 @@ ports:
     onOpen: open-browser
 tasks:
   - command: jupyter notebook
-  name: Jupyter Notebook Server
-  # Should capture the opener url and maybe open
+    name: Jupyter Notebook Server
+    # Should capture the opener url and maybe open
