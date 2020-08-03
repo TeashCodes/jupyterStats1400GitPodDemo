@@ -1,24 +1,28 @@
-FROM jupyter/r-notebook:acb539921413
+FROM gitpod/workspace-full
 
 LABEL maintainer="UWA Stats1400"
 
 USER root
 
-### Gitpod user ###
-RUN useradd -l -u 33333 -G sudo -md /home/gitpod -s /bin/bash -p gitpod gitpod && \
-    rm -r /home/gitpod && \
-    mv /home/$NB_USER /home/gitpod && \
-    usermod $NB_USER -G sudo,gitpod && \
-    chown -R gitpod:gitpos && \
-    sed -i.bkp -e 's/%sudo\s\+ALL=(ALL\(:ALL\)\?)\s\+ALL/%sudo ALL=NOPASSWD:ALL/g' /etc/sudoers
+ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
+ENV PATH /opt/conda/bin:$PATH
 
-ENV HOME=/home/gitpod
+
+RUN apt-get update --fix-missing && apt-get install -y ca-certificates \
+    libglib2.0-0 libxext6 libsm6 libxrender1 \
+    mercurial subversion
+
+
+### Anaconda3 ###
+
+RUN wget --quiet https://repo.anaconda.com/archive/Anaconda3-2020.07-Linux-x86_64.sh -O ~/anaconda.sh && \
+    /bin/bash ~/anaconda.sh -b -p /opt/conda && \
+    rm ~/anaconda.sh && \
+    ln -s /opt/conda/etc/profile.d/conda.sh /etc/profile.d/conda.sh && \
+    echo ". /opt/conda/etc/profile.d/conda.sh" >> ~/.bashrc && \
+    echo "conda activate base" >> ~/.bashrc
+
+
 WORKDIR $HOME
-
-# custom Bash prompt
 USER gitpod
-# RUN  { echo && echo "PS1='\[\e]0;\u \w\a\]\[\033[01;32m\]\u\[\033[00m\] \[\033[01;34m\]\w\[\033[00m\] \\\$ '" ; } >> .bashrc
-
-### Gitpod user (2) ###
-
 
