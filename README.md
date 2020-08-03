@@ -9,7 +9,7 @@ Choose Gitpod.io or MyBinder.org
 
 ### MyBinder
 
-[![Open in MyBinder](http://mybinder.org/badge_logo.svg)](http://mybinder.org/v2/gh/zvodd/jupyterStats1400GitPodDemo)
+[![Open in MyBinder](http://mybinder.org/badge_logo.svg)](http://mybinder.org/v2/gh/zvodd/jupyterStats1400GitPodDemo/r-version)
 
 
 ### Gitpod
@@ -29,3 +29,26 @@ Or copy and paste one of these URLs:
 
 Then access `http://ws-12345678-1234-1234-1234-1234567890ab:8888/?token=abcdef1234567890123456789012345678901234567890` in browser tab.
 (Host name and token will be varied.)
+
+
+
+
+
+###### Notes/References around setting up this repository
+
+https://github.com/jins-tkomoda/dash-and-jupyter-notebook-with-gitpod
+https://www.gitpod.io/docs/config-docker/
+
+https://github.com/gitpod-io/workspace-images/blob/master/full/Dockerfile
+
+https://github.com/jupyter/docker-stacks/blob/master/r-notebook/Dockerfile
+https://github.com/jupyter/docker-stacks/tree/master/base-notebook
+
+
+https://mybinder.readthedocs.io/en/latest/config_files.html
+https://mybinder.readthedocs.io/en/latest/sample_repos.html
+https://github.com/binder-examples/r
+https://github.com/binder-examples/conda
+
+
+https://docs.anaconda.com/anaconda/packages/r-language-pkg-docs/

@@ -1,9 +1,9 @@
 image:
   file: .gitpod.Dockerfile
 ports:
-  - port: 8888
-    onOpen: open-browser
+- port: 8888
+  onOpen: open-browser
 tasks:
-  - command: jupyter notebook
-    name: Jupyter Notebook Server
-    # Should capture the opener url and maybe open
+- command: jupyter notebook
+  name: Jupyter Notebook Server
+  # Should capture the opener url and maybe open
