@@ -1,28 +1,52 @@
-FROM gitpod/workspace-full
+FROM zvodd/uwa-stat1400-jupyter-r
 
-LABEL maintainer="UWA Stats1400"
+### base ###
+RUN yes | unminimize \
+    && apt-get install -yq \
+        zip \
+        unzip \
+        bash-completion \
+        build-essential \
+        htop \
+        jq \
+        less \
+        locales \
+        man-db \
+        nano \
+        software-properties-common \
+        sudo \
+        time \
+        vim \
+        multitail \
+        lsof \
+    && locale-gen en_US.UTF-8 \
+    && mkdir /var/lib/apt/dazzle-marks \
+    && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/*
 
-USER root
+ENV LANG=en_US.UTF-8
 
-ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
-ENV PATH /opt/conda/bin:$PATH
+### Git ###
+RUN add-apt-repository -y ppa:git-core/ppa \
+    && apt-get install -yq git \
+    && rm -rf /var/lib/apt/lists/*
 
-
-RUN apt-get update --fix-missing && apt-get install -y ca-certificates \
-    libglib2.0-0 libxext6 libsm6 libxrender1 \
-    mercurial subversion
-
-
-### Anaconda3 ###
-
-RUN wget --quiet https://repo.anaconda.com/archive/Anaconda3-2020.07-Linux-x86_64.sh -O ~/anaconda.sh && \
-    /bin/bash ~/anaconda.sh -b -p /opt/conda && \
-    rm ~/anaconda.sh && \
-    ln -s /opt/conda/etc/profile.d/conda.sh /etc/profile.d/conda.sh && \
-    echo ". /opt/conda/etc/profile.d/conda.sh" >> ~/.bashrc && \
-    echo "conda activate base" >> ~/.bashrc
-
-
+### Gitpod user ###
+# '-l': see https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#user
+RUN useradd -l -u 33333 -G sudo -md /home/gitpod -s /bin/bash -p gitpod gitpod \
+    # passwordless sudo for users in the 'sudo' group
+    && sed -i.bkp -e 's/%sudo\s\+ALL=(ALL\(:ALL\)\?)\s\+ALL/%sudo ALL=NOPASSWD:ALL/g' /etc/sudoers
+ENV HOME=/home/gitpod
 WORKDIR $HOME
-USER gitpod
+# custom Bash prompt
+RUN { echo && echo "PS1='\[\e]0;\u \w\a\]\[\033[01;32m\]\u\[\033[00m\] \[\033[01;34m\]\w\[\033[00m\] \\\$ '" ; } >> .bashrc
 
+### Gitpod user (2) ###
+USER gitpod
+# use sudo so that user does not get sudo usage info on (the first) login
+RUN sudo echo "Running 'sudo' for Gitpod: success" && \
+    # create .bashrc.d folder and source it in the bashrc
+    mkdir /home/gitpod/.bashrc.d && \
+    (echo; echo "for i in \$(ls \$HOME/.bashrc.d/*); do source \$i; done"; echo) >> /home/gitpod/.bashrc
+
+
+USER gitpod
