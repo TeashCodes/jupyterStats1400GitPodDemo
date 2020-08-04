@@ -2,9 +2,9 @@ image:
   file: .gitpod.Dockerfile
 ports:
 - port: 8888
-  onOpen: open-browser
+  onOpen: ignore
 tasks:
-- init: cp -r $GITPOD_REPO_ROOT./jupyter ~
-- command: jupyter notebook
+- init: cp -r $GITPOD_REPO_ROOT/.jupyter ~
+- command: jupyter notebook --no-browser
   name: Jupyter Notebook Server
-  # Should capture the opener url and maybe open
+  openIn: main
