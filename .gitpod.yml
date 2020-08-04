@@ -8,3 +8,4 @@ tasks:
 - command: jupyter notebook --no-browser
   name: Jupyter Notebook Server
   openIn: main
+  openMode: split-right
