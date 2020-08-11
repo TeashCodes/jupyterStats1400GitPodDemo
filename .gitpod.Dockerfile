@@ -5,11 +5,12 @@ LABEL maintainer="UWA Stats1400"
 USER root
 
 ### Gitpod user ###
-RUN useradd -l -u 33333 -G sudo -md /home/gitpod -s /bin/bash -p gitpod gitpod && \
+RUN useradd -l -u 33333 -G sudo,users,$NB_GID -md /home/gitpod -s /bin/bash -p gitpod gitpod && \
     rm -r /home/gitpod && \
     mv /home/$NB_USER /home/gitpod && \
     usermod $NB_USER -G sudo,gitpod && \
-    chown -R gitpod:gitpos && \
+    chown -R gitpod:gitpod /home/gitpod && \
+    chown -R gitpod:$NB_GID /opt/conda && \
     sed -i.bkp -e 's/%sudo\s\+ALL=(ALL\(:ALL\)\?)\s\+ALL/%sudo ALL=NOPASSWD:ALL/g' /etc/sudoers
 
 ENV HOME=/home/gitpod
