@@ -18,13 +18,14 @@ After jupyter notebook start-up, you can see a message like followings in termin
 To access the notebook, open this file in a browser:
         file:///home/gitpod/.local/share/jupyter/runtime/nbserver-1516-open.html
 Or copy and paste one of these URLs:
-        http://(ws-12345678-1234-1234-1234-1234567890ab or 127.0.0.1):8888/?token=abcdef1234567890123456789012345678901234567890
+        http://ws-12345678-1234-1234-1234-1234567890ab:8888/?token=abcdef1234567890123456789012345678901234567890
+        or
+        127.0.0.1:8888/?token=abcdef1234567890123456789012345678901234567890
 ```
 
 Then access `http://ws-12345678-1234-1234-1234-1234567890ab:8888/?token=abcdef1234567890123456789012345678901234567890` in browser tab.
-(Host name and token will be varied.)
-
-
+(Host name and token will be varied.) 
+__You can also just hold the Ctrl key and click one of the links in the terminal.__
 
 
 
