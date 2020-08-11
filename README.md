@@ -5,12 +5,6 @@ Testing to see if this repo can serve as a Lab template for students to easily u
 
 # Usage
 
-Choose Gitpod.io or MyBinder.org
-
-### MyBinder
-
-[![Open in MyBinder](http://mybinder.org/badge_logo.svg)](http://mybinder.org/v2/gh/zvodd/jupyterStats1400GitPodDemo/r-version)
-
 
 ### Gitpod
 
